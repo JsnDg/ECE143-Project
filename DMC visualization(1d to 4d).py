@@ -10,8 +10,8 @@ fire/no fire ,indicating whether there's fire
 
 figure 1-14:1d visualization
 figure 15-20:2d visualization
-figure 21-23:3d visualization
-figrue 24:4d visualization
+figure 21-23:3d visualization(red histograms:fire;green histograms:no fire)
+figrue 24:4d visualization(mark histograms with interval values of DMC)
 
 '''
 import matplotlib.pyplot as plt
@@ -155,19 +155,16 @@ x,y,z = np.array(fire['temp']),np.array(fire['rain']),np.array(fire['DMC'])
 x = x.flatten('F')   
 y = y.flatten('F')
 
-# Based on the interval values of DMC, mark the histograms with different colors
-q=fire['DMC']
+'''mark the histograms with two colors
+red: fire
+green: no fire
+'''
+q=df1['FIRE']
 C = []  
 for a in q:
-    if a < 50:
-        C.append('orange')
-    elif a < 100:
-        C.append('blue')
-    elif a < 150:
-        C.append('purple')
-    elif a < 200:
+    if a == 'fire':
         C.append('red')
-    elif a > 200:
+    else:
         C.append('green')
 
 dx = 0.6 * np.ones_like(x)
@@ -276,11 +273,6 @@ plt.axis([0,35,-6,6])
 
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
 plt.show()
-
-
-
-
-
 
 
 
