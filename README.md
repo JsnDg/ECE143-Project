@@ -1,3 +1,5 @@
 # ECE143-Project
 
-Revised on 12/11/18
+Revised on 18/11/18
+
+SVM added
