@@ -24,7 +24,19 @@ X2=df1[['temp','rain']]
 X3=df1[['RH','rain']]
 Y=df1['DMC']
 
+'''
+generate a function for inputting regression models and the independent variables needed to be fitted
+:parm X: series of independent variables needed to be fitted
+:parm model:regression models
+:parm n: the index of plot output
 
+For each plot of the regression method,there are two subplots
+a. estimate the fitting effect/result by comparing the distribution of scatters from true values and predicted values
+and also a score of fitting effect will be given. The higher, the better.
+b. estimate the predicted value and true value (based on the cross validation)
+when the scatters are distributed to the diagonal line more closely, the fitting effect/result is better
+
+'''
 def regression_method(X,model,n):
     X_train, X_test, y_train, y_test = train_test_split(X, Y, random_state=1)
     model.fit(X_train,y_train)
@@ -48,9 +60,13 @@ def regression_method(X,model,n):
     plt.show()
     print (str(title[n-1])+'MSE: ',metrics.mean_squared_error(y_test, y_pred))
     print (str(title[n-1])+'RMSE: ',np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
-    #print (model.intercept_)
+    #print (model.intercept_) # not every model has intercept and coefficient
     #print (model.coef_)
 
+'''
+:initiate the regression methods used later
+
+'''
 lin_reg=LinearRegression()
 tree_reg = DecisionTreeRegressor()
 las_CV=LassoCV()
@@ -62,7 +78,11 @@ rgCV=RidgeCV()
 ada = ensemble.AdaBoostRegressor(n_estimators=500)
 gbrt = ensemble.GradientBoostingRegressor(n_estimators=100)
 
+'''
+: test all independent variables(temp,rain,RH) and the dependent variable(DMC)
+: omit one independent variables from (temp,rain,RH) each time and see the corresponding fitting effect of DMC and rest indep variables
 
+'''
 for i in [X,X1,X2,X3]:
     m=1
     regression_method(i,lin_reg,1*m)
@@ -76,8 +96,4 @@ for i in [X,X1,X2,X3]:
     regression_method(i,ada,9*m)
     regression_method(i,gbrt,10*m) 
     m+=1
-
-
-
-
 
