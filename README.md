@@ -6,11 +6,11 @@ Project Description:
 We will be analyzing a dataset collected from forests in the northeast region of Portugal. Firstly, we will establish relationships between the meteorological factors correlated to forest fires(e.g. temperature, wind, FFMC, DMC). We will then apply the relationship to building a prediction system for forest fires. The system will calculate and give feedback on the probability of potential forest fires using SVM.
 
 Modules used:
-   Please install all of the modules mentioned below before running the files. 
-  -Pandas: readcsv,\n
-  -matplotlib.pyplot:\n
-  -numpy:genfromtext\n
-  -sklearn:datasets, linear_model,sklearn.metrics
+   Please install all of the modules mentioned below before running the files.<br /> 
+  -Pandas: readcsv,<br />     
+  -matplotlib.pyplot<br />
+  -numpy:genfromtext<br />
+  -sklearn:datasets, linear_model,sklearn.metrics<br />
   -To Be Continued
 
 Dataset link:http://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/ rates fire hazards based on both natural factors, such as humidity, as well as artificial factors, such as litter. All data is collected from Montesinho park, located in Portugal, with more than 570 instances through 2001 to 2003. 
@@ -21,7 +21,7 @@ File Overview:
 
 
 Reference
-  1.[Cortez and Morais, 2007] P. Cortez and A. Morais. A Data Mining Approach to Predict Forest Fires using Meteorological Data. In J. Neves, M. F. Santos and J. Machado Eds., New Trends in Artificial Intelligence, Proceedings of the 13th EPIA 2007 - Portuguese Conference on Artificial Intelligence, December, Guimarães, Portugal, pp. 512-523, 2007. APPIA, ISBN-13 978-989-95618-0-9. Available at: www.dsi.uminho.pt/~pcortez/fires.pdf
+  1.[Cortez and Morais, 2007] P. Cortez and A. Morais. A Data Mining Approach to Predict Forest Fires using Meteorological Data. In J. Neves, M. F. Santos and J. Machado Eds., New Trends in Artificial Intelligence, Proceedings of the 13th EPIA 2007 - Portuguese Conference on Artificial Intelligence, December, Guimarães, Portugal, pp. 512-523, 2007. APPIA, ISBN-13 978-989-95618-0-9. Available at: www.dsi.uminho.pt/~pcortez/fires.pdf <br />    
   2.[UCI Machine Learning Repository] Forest Fires Data Set. Available at: http://archive.ics.uci.edu/ml/datasets/Forest+Fires
 
 
