@@ -31,7 +31,7 @@
   classify the histograms by variable 'FIRE': (red histograms:fire; green histograms:no fire)
 
 5. 4D Visualization
-  Figrue 24Realize the 4-th dimension by marking the histograms with different colors based on the interval values of DMC
+  Figrue 24: Realize the 4-th dimension by marking the histograms with different colors based on the interval values of DMC
   x,y,z-axis: temp,RH,rain 
 
 '''
@@ -127,20 +127,22 @@ p.s.: for the plots related to rain, for better observation, adjustment is neede
 plt.figure(17)
 sub=131
 for i in ['temp','RH','rain']:
-	plt.subplot(sub)
-	plt.title('DMC-'+i, fontsize=14, position=(0.5,1.05))
-	sns.kdeplot(df1[i],df1['DMC'], # demonstrate the probability distribution of two variables
+  plt.subplot(sub)
+  plt.title('DMC-'+i, fontsize=14, position=(0.5,1.05))
+  sns.kdeplot(df1[i],df1['DMC'], # demonstrate the probability distribution of two variables
            cbar = True,    # display color bar
            shade = True,   # display shades
            cmap = 'Reds',  # set the color palatte
            shade_lowest=False,  # not display periphery color/shade
            n_levels = 40   # number of curves, the higher, the smoother
            )# the color change indicates the change of density
-	plt.grid(linestyle = '--')
-	plt.scatter(df1[i], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
-	sns.rugplot(df1[i], color='g', axis='x',alpha = 0.5)
-	sns.rugplot(df1['DMC'], color='r', axis='y',alpha = 0.5)
-	sub += 1
+  plt.grid(linestyle = '--')
+  plt.scatter(df1[i], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+  sns.rugplot(df1[i], color='g', axis='x',alpha = 0.5)
+  sns.rugplot(df1['DMC'], color='r', axis='y',alpha = 0.5)
+  if sub==133:
+    plt.axis([-6,6.5,0,300])
+  sub+=1
 plt.show()
 
 plt.figure(18) # DMC-temp
@@ -169,6 +171,7 @@ plt.grid(linestyle = '--')
 plt.scatter(df1['rain'], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
 sns.rugplot(df1['rain'], color="orange", axis='x',alpha = 0.5)
 sns.rugplot(df1['DMC'], color="purple", axis='y',alpha = 0.5)
+plt.axis([-6,6.5,0,300])
 plt.show()
 
 fig1=plt.figure(21)
@@ -185,12 +188,12 @@ red: fire
 green: no fire
 '''
 q=df1['FIRE']
-C = []  
+C = []  # the list serving as the color palatte 
 for a in q:
     if a == 'fire':
-        C.append('red')
+        C.append('red') # mark the bars with red color if there's fire
     else:
-        C.append('green')
+        C.append('green') # mark the bars with green color if there's no fire
 
 dx = 0.6 * np.ones_like(x) # set the width of the histograms, the constant can be adjusted based on observation of plots
 dy = 0.2 * np.ones_like(y)
@@ -202,7 +205,7 @@ ax.set_title('temp-rain-DMC')
 ax.set_xlabel('temp')
 ax.set_ylabel('rain')
 ax.set_zlabel('RH')
-plt.axis([0,35,-6,6])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
+plt.axis([0,35,-6,6.5])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
 
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
 
@@ -246,7 +249,7 @@ ax.set_title('rain-RH-DMC')
 ax.set_xlabel('rain')
 ax.set_ylabel('RH')
 ax.set_zlabel('DMC')
-plt.axis([-6,6,20,100]) #set the interval of axises to move the bunch of histograms to the centeral area for better observation
+plt.axis([-6,6.5,20,100]) #set the interval of axises to move the bunch of histograms to the centeral area for better observation
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
 plt.show()
 
@@ -293,7 +296,7 @@ ax.set_title('DMC-temp-rain-RH')
 ax.set_xlabel('temp')
 ax.set_ylabel('rain')
 ax.set_zlabel('RH')
-plt.axis([0,35,-6,6])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
+plt.axis([0,35,-6,6.5])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
 
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
 plt.show()
