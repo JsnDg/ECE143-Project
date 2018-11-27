@@ -174,6 +174,12 @@ sns.rugplot(df1['DMC'], color="purple", axis='y',alpha = 0.5)
 plt.axis([-6,6.5,0,300])
 plt.show()
 
+'''
+3D: DMC & any two from temp,RH,rain
+  Figure 21-23:histograms: x,y-axis: any two from temp,RH,rain; z-axis: DMC
+  classify the histograms by variable 'FIRE': (red histograms:fire; green histograms:no fire)
+'''
+
 fig1=plt.figure(21)
 ax = fig1.add_subplot(111, projection='3d')   
 
@@ -300,3 +306,4 @@ plt.axis([0,35,-6,6.5])#set the interval of axises to move the bunch of histogra
 
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
 plt.show()
+
