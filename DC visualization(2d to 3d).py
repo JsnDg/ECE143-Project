@@ -151,7 +151,7 @@ z = np.zeros_like(z)
 ax.set_title('temp-rain-DC')
 ax.set_xlabel('temp')
 ax.set_ylabel('rain')
-ax.set_zlabel('RH')
+ax.set_zlabel('DC')
 plt.axis([0,35,-6,6.5])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
 
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
