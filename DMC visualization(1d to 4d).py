@@ -23,7 +23,9 @@
   Figure 17-20: more complicated, detailed and advanced plots given: 
     kde plots: demonstrate the density distribution between two variables with color change according to the color palatte set
     scatter plots: spot the data easily 
+    (red scatters: fire; green scatters: no fire)
     axis: also display the distribution line of each variable with different color 
+    rug plots on axis: miniature of histograms, facilitating the procedure of finding data values and comparing them
     color bar: relate the color shade/range with data values for identifying the level of density 
 
 4. 3D Visualization(DMC & any two from temp,RH,rain)
@@ -33,6 +35,8 @@
 5. 4D Visualization
   Figrue 24: Realize the 4-th dimension by marking the histograms with different colors based on the interval values of DMC
   x,y,z-axis: temp,RH,rain 
+
+Outlier found: rain=6.4
 
 '''
 import matplotlib.pyplot as plt
@@ -109,13 +113,14 @@ df1=pd.DataFrame(fire,columns=['DMC','temp','RH','rain','ln(area+1)'])
 
 # set [ln(area+1)>0]=1 ; [ln(area+1)=0]=0 
 df1['FIRE'] = np.where(df1['ln(area+1)']>0, 'fire', 'no fire')
-sns.pairplot(df1,vars=['DMC','temp','RH','rain'],kind='reg',hue='FIRE',palette='hls',markers=["o", "x"])
+sns.pairplot(df1,vars=['DMC','temp','RH','rain'],kind='reg',hue='FIRE',palette='hls',markers=["o", "x"]) 
+# hue='FIRE',to classify the data by variable 'FIRE' ; kind='reg', to introduce linear regression 
 plt.show()
 
 plt.figure(16)
 g = sns.PairGrid(df1)
 g.map_diag(sns.kdeplot)
-g.map_offdiag(sns.kdeplot,cmap="Blues_d",n_levels=20)
+g.map_offdiag(sns.kdeplot,cmap="Blues_d",n_levels=20) # the n_levels higher, the curves smoother
 plt.show()
 
 '''
@@ -124,6 +129,19 @@ figure 17: DMC-temp & DMC-RH & DMC-rain
 figure 18-20: DMC-temp / RH / rain
 p.s.: for the plots related to rain, for better observation, adjustment is needed since scatters were initially distributed around 0.00
 '''
+
+'''
+mark the scatters/bars with two colors for better observation
+red: fire; green: no fire
+'''
+q=df1['FIRE']
+C = []  # the list serving as the color palatte 
+for a in q:
+    if a == 'fire':
+        C.append('red') # mark the bars/scatters with red color if there's fire
+    else:
+        C.append('green') # mark the bars/scatters with green color if there's no fire
+
 plt.figure(17)
 sub=131
 for i in ['temp','RH','rain']:
@@ -132,35 +150,35 @@ for i in ['temp','RH','rain']:
   sns.kdeplot(df1[i],df1['DMC'], # demonstrate the probability distribution of two variables
            cbar = True,    # display color bar
            shade = True,   # display shades
-           cmap = 'Reds',  # set the color palatte
+           cmap = 'Blues',  # set the color palatte
            shade_lowest=False,  # not display periphery color/shade
            n_levels = 40   # number of curves, the higher, the smoother
            )# the color change indicates the change of density
   plt.grid(linestyle = '--')
-  plt.scatter(df1[i], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+  plt.scatter(df1[i], df1['DMC'], s=5, alpha = 0.5, color = C, marker='+') #scatter: green indicates no fire, red indicates fire
   sns.rugplot(df1[i], color='g', axis='x',alpha = 0.5)
   sns.rugplot(df1['DMC'], color='r', axis='y',alpha = 0.5)
   if sub==133:
-    plt.axis([-6,6.5,0,300])
+    plt.axis([-6,6.5,0,300]) # move the plots to central area for better observation 
   sub+=1
 plt.show()
 
 plt.figure(18) # DMC-temp
 plt.title('DMC-temp', fontsize=14, position=(0.5,1.05))
-pal=sns.cubehelix_palette(8, gamma=2,as_cmap=True)
+pal='Blues'
 sns.kdeplot(df1['temp'],df1['DMC'],cbar = True,shade = True,cmap = pal,shade_lowest=False,n_levels = 40)
 plt.grid(linestyle = '--')
-plt.scatter(df1['temp'], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+plt.scatter(df1['temp'], df1['DMC'], s=5, alpha = 0.5, color = C, marker='+') #scatter: green indicates no fire, red indicates fire
 sns.rugplot(df1['temp'], color="orange", axis='x',alpha = 0.5)
 sns.rugplot(df1['DMC'], color="purple", axis='y',alpha = 0.5)
 plt.show()
 
 plt.figure(19) # DMC-RH
 plt.title('DMC-RH', fontsize=14, position=(0.5,1.05))
-pal=sns.cubehelix_palette(8, start=.5, rot=-.75,as_cmap=True)
+pal='Blues'
 sns.kdeplot(df1['RH'],df1['DMC'],cbar = True,shade = True,cmap = pal,shade_lowest=False,n_levels = 40)
 plt.grid(linestyle = '--')
-plt.scatter(df1['RH'], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+plt.scatter(df1['RH'], df1['DMC'], s=5, alpha = 0.5, color = C, marker='+') #scatter: green indicates no fire, red indicates fire
 sns.rugplot(df1['RH'], color="blue", axis='x',alpha = 0.5)
 sns.rugplot(df1['DMC'], color="green", axis='y',alpha = 0.5)
 
@@ -168,10 +186,10 @@ plt.figure(20) # DMC-rain
 plt.title('DMC-rain', fontsize=14, position=(0.5,1.05))
 sns.kdeplot(df1['rain'],df1['DMC'],cbar = True,shade = True,cmap = 'Purples',shade_lowest=False,n_levels = 40)
 plt.grid(linestyle = '--')
-plt.scatter(df1['rain'], df1['DMC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+plt.scatter(df1['rain'], df1['DMC'], s=5, alpha = 0.5, color = C, marker='+') #scatter: green indicates no fire, red indicates fire
 sns.rugplot(df1['rain'], color="orange", axis='x',alpha = 0.5)
 sns.rugplot(df1['DMC'], color="purple", axis='y',alpha = 0.5)
-plt.axis([-6,6.5,0,300])
+plt.axis([-6,6.5,0,300]) # move the plots to central area for better observation 
 plt.show()
 
 '''
@@ -179,7 +197,6 @@ plt.show()
   Figure 21-23:histograms: x,y-axis: any two from temp,RH,rain; z-axis: DMC
   classify the histograms by variable 'FIRE': (red histograms:fire; green histograms:no fire)
 '''
-
 fig1=plt.figure(21)
 ax = fig1.add_subplot(111, projection='3d')   
 
@@ -190,8 +207,7 @@ y = y.flatten('F')
 
 '''
 mark the bars with two colors for better observation
-red: fire
-green: no fire
+red: fire; green: no fire
 '''
 q=df1['FIRE']
 C = []  # the list serving as the color palatte 
@@ -214,7 +230,6 @@ ax.set_zlabel('RH')
 plt.axis([0,35,-6,6.5])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
 
 ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
-
 
 
 fig2=plt.figure(22)
