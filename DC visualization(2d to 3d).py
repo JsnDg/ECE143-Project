@@ -14,14 +14,16 @@
   Figure 16: pairplots(diagonal: single variable distribution; non-diagonal: kernel density plots of two variables)
   Figure 17-20: more complicated, detailed and advanced plots given: 
     kde plots: demonstrate the density distribution between two variables with color change according to the color palatte set
-    scatter plots: spot the data easily 
+    scatter plots: spot the data easily (red scatters:fire ; green scatters: no fire) 
     axis: also display the distribution line of each variable with different color 
+    rug plots on axises: like minimized histograms facilitating the data finding and comparing
     color bar: relate the color shade/range with data values for identifying the level of density 
 
 4. 3D Visualization(DC & temp,RH,rain)
   Figure 21-23:histograms: x,y-axis: temp,rain; z-axis: DC
   classify the histograms by variable 'FIRE': (red histograms:fire; green histograms:no fire)
 
+Outlier found: rain=6.4
 
 '''
 import matplotlib.pyplot as plt
@@ -74,6 +76,19 @@ figure 17: DC-temp & DC-RH & DC-rain
 figure 18-20: DC-temp / RH / rain
 p.s.: for the plots related to rain, for better observation, adjustment is needed since scatters were initially distributed around 0.00
 '''
+
+'''
+mark the bars/scatters with two colors for better observation
+red: fire ; green: no fire
+'''
+q=df1['FIRE']
+C = []  # the list serving as the color palatte 
+for a in q:
+    if a == 'fire':
+        C.append('red') # mark the bars/scatters with red color if there's fire
+    else:
+        C.append('green') # mark the bars/scatters with green color if there's no fire
+
 plt.figure(3)
 sub=121
 for i in ['temp','rain']:
@@ -88,7 +103,7 @@ for i in ['temp','rain']:
            n_levels = 40   # number of curves, the higher, the smoother
            )# the color change indicates the change of density
   plt.grid(linestyle = '--')
-  plt.scatter(df1[i], df1['DC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+  plt.scatter(df1[i], df1['DC'], s=5, alpha = 0.5, color = C, marker='+') #scatter(green:no fire; red:fire)
   if sub==122:
     plt.axis([-6,6.5,0,1000])
   sns.rugplot(df1[i], color='r', axis='x',alpha = 0.5)
@@ -98,20 +113,20 @@ plt.show()
 
 plt.figure(4) # DC-temp
 plt.title('DC-temp', fontsize=14, position=(0.5,1.05))
-pal=sns.cubehelix_palette(8, gamma=2,as_cmap=True)
+pal='Blues'
 sns.kdeplot(df1['temp'],df1['DC'],cbar = True,shade = True,cmap = pal,shade_lowest=False,n_levels = 40)
 plt.grid(linestyle = '--')
-plt.scatter(df1['temp'], df1['DC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+plt.scatter(df1['temp'], df1['DC'], s=5, alpha = 0.5, color = C, marker='+') #scatter(green:no fire; red:fire)
 sns.rugplot(df1['temp'], color="orange", axis='x',alpha = 0.5)
 sns.rugplot(df1['DC'], color="purple", axis='y',alpha = 0.5)
 plt.show()
 
 plt.figure(5) # DC-rain
 plt.title('DC-rain', fontsize=14, position=(0.5,1.05))
-pal=sns.cubehelix_palette(8, start=.5, rot=-.75,as_cmap=True)
+pal='Blues'
 sns.kdeplot(df1['rain'],df1['DC'],cbar = True,shade = True,cmap = pal,shade_lowest=False,n_levels = 40)
 plt.grid(linestyle = '--')
-plt.scatter(df1['rain'], df1['DC'], s=5, alpha = 0.5, color = 'k', marker='+') #scatter
+plt.scatter(df1['rain'], df1['DC'], s=5, alpha = 0.5, color = C, marker='+') #scatter(green:no fire; red:fire)
 sns.rugplot(df1['rain'], color="blue", axis='x',alpha = 0.5)
 sns.rugplot(df1['DC'], color="green", axis='y',alpha = 0.5)
 plt.axis([-6,6.5,0,1000])
@@ -129,18 +144,6 @@ x,y,z = np.array(fire['temp']),np.array(fire['rain']),np.array(fire['DC'])
 x = x.flatten('F')   
 y = y.flatten('F')
 
-'''
-mark the bars with two colors for better observation
-red: fire
-green: no fire
-'''
-q=df1['FIRE']
-C = []  # the list serving as the color palatte 
-for a in q:
-    if a == 'fire':
-        C.append('red') # mark the bars with red color if there's fire
-    else:
-        C.append('green') # mark the bars with green color if there's no fire
 
 dx = 0.6 * np.ones_like(x) # set the width of the histograms, the constant can be adjusted based on observation of plots
 dy = 0.2 * np.ones_like(y)
@@ -154,7 +157,5 @@ ax.set_ylabel('rain')
 ax.set_zlabel('DC')
 plt.axis([0,35,-6,6.5])#set the interval of axises to move the bunch of histograms to the centeral area for better observation
 
-ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average')
+ax.bar3d(x, y, z, dx, dy, dz, color=C, zsort='average') #green bars: no fire; red bars:fire
 plt.show()
-
-
