@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This is a temporary script file.
+Outlier detection of natural features as they depend on intermediate features used for building SVM
 """
 from numpy import genfromtxt
 my_data = genfromtxt('forestfires.csv', delimiter=',')
@@ -14,6 +12,7 @@ rh=my_data[1:517,8]
 temp=my_data[1:517,9]
 wind=my_data[1:517,10]
 area=my_data[1:517,12]
+#to show data points with and without a fire
 fire=[]
 for i in range(0,516):
     if area[i]==0:
