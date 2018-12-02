@@ -4,7 +4,6 @@ Created on Sun Dec  2 14:51:50 2018
 
 @author: meher
 """
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -62,17 +61,17 @@ for i in ['temp','rain']:
   sub += 1
 plt.show()
 
-plt.figure(4) # DC-temp
+plt.figure(4) 
 plt.title('FFMC-temp', fontsize=14, position=(0.5,1.05))
 pal='Blues'
 sns.kdeplot(df1['temp'],df1['FFMC'],cbar = True,shade = True,cmap = pal,shade_lowest=False,n_levels = 40)
 plt.grid(linestyle = '--')
 plt.scatter(df1['temp'], df1['FFMC'], s=5, alpha = 0.5, color = C, marker='+') #scatter(green:no fire; red:fire)
 sns.rugplot(df1['temp'], color="orange", axis='x',alpha = 0.5)
-sns.rugplot(df1['DC'], color="purple", axis='y',alpha = 0.5)
+sns.rugplot(df1['FFMC'], color="purple", axis='y',alpha = 0.5)
 plt.show()
 
-plt.figure(5) # DC-rain
+plt.figure(5) 
 plt.title('FFMC-rain', fontsize=14, position=(0.5,1.05))
 pal='Blues'
 sns.kdeplot(df1['rain'],df1['FFMC'],cbar = True,shade = True,cmap = pal,shade_lowest=False,n_levels = 40)
@@ -86,7 +85,7 @@ plt.show()
 fig1=plt.figure(6)
 ax = fig1.add_subplot(111, projection='3d')   
 
-x,y,z = np.array(fire['temp']),np.array(fire['rain']),np.array(fire['DC'])
+x,y,z = np.array(fire['temp']),np.array(fire['rain']),np.array(fire['FFMC'])
 x = x.flatten('F')   
 y = y.flatten('F')
 
