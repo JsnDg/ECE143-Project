@@ -12,7 +12,7 @@ Modules used:
   -seaborn<br />
   -mpl_toolkits.mplot3d<br />
   -pyehcart<br />
-  -numpy:genfromtext<br />
+  -numpy<br />
   -sklearn:datasets, linear_model,sklearn.metrics<br />
   -To Be Continued
 
