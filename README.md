@@ -7,7 +7,7 @@ We will be analyzing a dataset collected from forests in the northeast region of
 
 Modules used:
    Please install all of the modules mentioned below before running the files.<br /> 
-  -Pandas: readcsv,<br />
+  -Pandas<br />
   -matplotlib.pyplot<br />
   -seaborn<br />
   -mpl_toolkits.mplot3d<br />
