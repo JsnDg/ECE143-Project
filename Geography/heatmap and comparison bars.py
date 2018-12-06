@@ -95,11 +95,11 @@ plt.show()
 
 
 '''
-create new variable/column: 
-summer_temp, which only displays the temperatures in summer months
-non-summer_temp, which only displays the temperatures in non-summer months
-
+filter out the data regarding temperatures in summer months 
+: type fire['summer_temp']: pandas.core.series.Series
+: param fire['summer_temp']: temperatures in summer months
 '''
+
 fire['summer_temp']=np.where(fire['temp'],0,0)
 a=fire.loc[fire['month']<10]
 a=a.loc[a['month']>4]
