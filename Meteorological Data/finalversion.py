@@ -38,7 +38,9 @@ filter out the data regarding fire cases
 '''
 c=fire.loc[fire['FIRE']=='fire']
 
-'''
+
+def singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area'],figNo=13):
+  	'''
 : Function name: singleparameterdistribution
 : Function works to demonstrate the distribution of all single variables in our dataset
   There are three distribution modes: 1) histograms (hist=True), color palatte:'r' 
@@ -50,8 +52,6 @@ c=fire.loc[fire['FIRE']=='fire']
 : param figNo: number of figures plot= number of variables plot
 	
 '''
-
-def singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area'],figNo=13):
   	assert isinstance(variable,list)
   	assert isinstance(figNo,int)
   	assert figNo==len(variable) #number of figures plot= number of variables plot
@@ -80,7 +80,10 @@ def singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','da
 
 singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area'],figNo=13)
 
-'''
+
+
+def heatmap(coordinate=True,temperature=True,figNo=2,clr_background='Reds'):
+	'''
 : Function name: heatmap
 : Function works to demonstrate the heatmap reagarding fire intensity or summer temperture distribution
   There are two kinds of heatmaps available: 
@@ -92,8 +95,6 @@ singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','day','
 : param clr_background: color palatte chosen for heatmaps, users can only set the color palattes available in Seaborn database
 	
 '''
-
-def heatmap(coordinate=True,temperature=True,figNo=2,clr_background='Reds'):
 	assert isinstance(figNo,int)
 	assert figNo==coordinate+temperature # number of figures plots should match 
 	df1=pd.DataFrame(fire,columns=['X','Y','ln(area+1)']) # set the dataframe for fire intensity 
@@ -128,7 +129,10 @@ def heatmap(coordinate=True,temperature=True,figNo=2,clr_background='Reds'):
 
 heatmap(coordinate=True,temperature=True,figNo=2,clr_background='Reds')
 
-'''
+
+
+def ModelFeature_kdeplots(model_nature={'DMC':['temp','RH']},figNo=2,clr_background='Blues',clr_rugplots='blue',scatters=True):
+	'''
 : Function name: ModelFeature_kdeplots
 : Function works to demonstrate the kdeplots reagarding fire intensity with model features against natural features
   Explanation of kde plots: 
@@ -152,9 +156,6 @@ heatmap(coordinate=True,temperature=True,figNo=2,clr_background='Reds')
 : param scatters: whether to show scatters in kdeplots(True/False)
 	
 '''
-
-
-def ModelFeature_kdeplots(model_nature={'DMC':['temp','RH']},figNo=2,clr_background='Blues',clr_rugplots='blue',scatters=True):
 	assert isinstance(model_nature,dict)
 	assert isinstance(figNo,int)
 	assert figNo==len(model_nature.keys()) #number of figures plot= number of model features in dict 
@@ -207,7 +208,10 @@ def ModelFeature_kdeplots(model_nature={'DMC':['temp','RH']},figNo=2,clr_backgro
 
 ModelFeature_kdeplots(model_nature={'DMC':['temp','RH'],'DC':['RH'],'FFMC':['temp','RH','wind'],'ISI':['wind']},figNo=4,clr_background='Blues',clr_rugplots='blue',scatters=False)
 
-'''
+
+
+def Time_Nature_kdeplots(time_nature={'month':['temp','RH','wind'],'day':['temp','RH','wind']},figNo=2,clr_background='Greens',clr_rugplots='green',scatters=True):
+	'''
 : Function name: Time_Nature_kdeplots
 : Function works to demonstrate the kdeplots reagarding fire intensity with natural features against time index(month/day)
   Explanation of kde plots: 
@@ -230,8 +234,6 @@ ModelFeature_kdeplots(model_nature={'DMC':['temp','RH'],'DC':['RH'],'FFMC':['tem
 : param scatters: whether to show scatters in kdeplots(True/False)
 	
 '''
-
-def Time_Nature_kdeplots(time_nature={'month':['temp','RH','wind'],'day':['temp','RH','wind']},figNo=2,clr_background='Greens',clr_rugplots='green',scatters=True):
 	assert isinstance(figNo,int) and figNo==len(time_nature.keys()) #number of figures plot= number of time indices in dict
 	assert isinstance(time_nature,dict)
 	assert isinstance(clr_background,str)
