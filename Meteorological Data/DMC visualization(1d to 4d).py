@@ -37,6 +37,8 @@
   x,y,z-axis: temp,RH,rain 
 
 Outlier found: rain=6.4
+Rain has been filtered out since 99.6% of its data values =0, which wil bring unnecessary interference to further analysis
+
 
 '''
 import matplotlib.pyplot as plt
