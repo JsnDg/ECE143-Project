@@ -6,7 +6,7 @@ rain=fire.rain
 
 def rain_plot(rain):
     '''
-    Plots the frequency of observing fires in respective months
+    Plots chart showing the variance of the feature-rain in the data
     '''
     import matplotlib.pyplot as plt
     assert isinstance(rain, pd.core.series.Series)
