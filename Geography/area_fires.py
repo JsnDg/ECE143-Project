@@ -11,6 +11,7 @@ def plot_areas_with_fires(intensity):
     import pandas as pd
     import matplotlib.pyplot as plt
     assert isinstance(intensity, pd.core.series.Series)
+    assert intensity.all()>=0
     inten=intensity.iloc[intensity.nonzero()[0]]
     total=inten.count()
     small=inten[inten < 50 ].count() 
