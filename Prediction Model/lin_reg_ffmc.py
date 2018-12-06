@@ -9,7 +9,7 @@ from sklearn import datasets, linear_model, metrics
 from numpy import genfromtxt
 #Using the data after removing outliers
 my_data = genfromtxt('forestfires_refined.csv', delimiter=',')
-
+#x1,x2,x3,x4 contain the natural features,Y is FFMC.
 my_data_new=np.delete(my_data,0,0)
 Y=np.column_stack([my_data_new[:,4]])
 x1=np.column_stack([my_data_new[:,8]])
