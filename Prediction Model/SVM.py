@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 
 from sklearn import svm
 
-csv_file=open('/Users/jasonding/Desktop/ECE143 Project/forestfires.csv')
+csv_file=open('forestfires.csv')
 fire_lines = csv.reader(csv_file)
 
 data = []
