@@ -5,13 +5,15 @@ Outlier detection of natural features as they depend on intermediate features us
 from numpy import genfromtxt
 my_data = genfromtxt('forestfires.csv', delimiter=',')
 import numpy as np
-print(my_data.shape)
+
 FFMC=my_data[1:517,4]
 rain=my_data[1:517,11]
 rh=my_data[1:517,8]
 temp=my_data[1:517,9]
 wind=my_data[1:517,10]
 area=my_data[1:517,12]
+assert area.all()>=0
+assert rain.all()>=0
 #to show data points with and without a fire
 fire=[]
 for i in range(0,516):
