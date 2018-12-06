@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np 
 from sklearn import datasets, linear_model, metrics 
 from numpy import genfromtxt
-my_data = genfromtxt('forestfires.csv', delimiter=',')
+#Using the data after removing outliers
+my_data = genfromtxt('forestfires_refined.csv', delimiter=',')
 
 my_data_new=np.delete(my_data,0,0)
 Y=np.column_stack([my_data_new[:,4]])
