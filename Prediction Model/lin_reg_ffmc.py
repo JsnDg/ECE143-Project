@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 13 18:54:47 2018
-
-@author: meher
-"""
-
+'''
+Fitting FFMC with respct to the natural features it depends on. As a linear fit predicts the FFMC values based on the natural ones decently,
+no other mechanisms were employed.
+'''
 import matplotlib.pyplot as plt 
 import numpy as np 
 from sklearn import datasets, linear_model, metrics 
