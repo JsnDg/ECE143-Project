@@ -3,16 +3,19 @@
 Authors: Group 11:Zijian Ding, Gitika Karumuri, Kunmao Li, Jianing Zhang
 
 Project Description:
-We will be analyzing a dataset collected from forests in the northeast region of Portugal. Firstly, we will establish relationships between the meteorological factors correlated to forest fires(e.g. temperature, wind, FFMC, DMC). We will then apply the relationship to building a prediction system for forest fires. The system will calculate and give feedback on the probability of potential forest fires using SVM.
+We have analyzed a dataset collected from forests in the northeast region of Portugal with the utilization of FWI system. Firstly, we established relationships between the meteorological factors(e.g. temperatrue, relative humidity, wind) as well as model features(e.g. FFMC, DMC) correlated to forest fires. Having acquired the weights and influence of different factors on forest fires, We then applied the relationship to building a prediction system for forest fires. The system will calculate the parametrs input and give feedback on the probability of potential forest fires using SVM.
 
 Modules used:
    Please install all of the modules mentioned below before running the files.<br /> 
+  data processing:
   -Pandas<br />
+  -numpy<br />
+  plot generating:
   -matplotlib.pyplot<br />
   -seaborn<br />
   -mpl_toolkits.mplot3d<br />
   -pyehcart<br />
-  -numpy<br />
+  regression models:
   -sklearn:datasets, linear_model,sklearn.metrics<br />
   -scipy.interpolate
 
@@ -28,6 +31,6 @@ Reference
 
 
 
-Revised on 27/11/18
+Revised on 6/12/18
 
 
