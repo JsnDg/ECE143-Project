@@ -16,7 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from itertools import combinations
 from IPython.core.pylabtools import figsize
 
-fire = pd.read_csv('/Users/jasonding/Desktop/ECE143 Project/forestfires.csv')
+fire = pd.read_csv('forestfires.csv')
 
 for i in range(517):
     '''
