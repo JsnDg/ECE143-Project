@@ -55,46 +55,55 @@ fire.day=fire.day.map({'mon':1,'tue':2,'wed':3,'thu':4,'fri':5,'sat':6,'sun':7})
 data=pd.DataFrame(fire,columns=['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area'])
 
 '''
-1D: Univariate Histograms,Kernel Density Estimation and Single Parameter Distribution
-'''
-n=1
-for i in ['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area']:
-	plt.figure(n)
-	plt.subplot(131)# Univariate Histograms
-	plt.title('Univariate Histogram', fontsize=14, position=(0.5,1.05))
-	plt.ylabel('Frequency')
-	sns.distplot(fire[i],kde=False,color='r',rug=True)
-	plt.subplot(132) # Kernel Density Estimation
-	plt.title('Kernel Density Estimation', fontsize=14, position=(0.5,1.05))
-	plt.ylabel('Probability')
-	sns.distplot(fire[i],hist=False,color='g',kde_kws={'shade':True})
-	plt.subplot(133) # Single Parameter Distribution
-	plt.title('Single Parameter Distribution', fontsize=14, position=(0.5,1.05))
-	plt.ylabel('Probability')
-	sns.distplot(fire[i],color='m')
-	n += 1
-
-'''
 According to the above three plots of 'area' in figure 13, the parameter is pretty distorted towards 0.0
 Thus using logrithm transform ln(area+1) to remodel 'area' and generate the new varibale 'ln(area+1)'
 '''
+
 fire['ln(area+1)']=np.log(fire['area']+1)
-plt.figure(14)
-plt.subplot(131)# Univariate Histograms
-plt.title('Univariate Histogram', fontsize=14, position=(0.5,1.05))
-plt.xlabel('ln(area+1)')
-plt.ylabel('Frequency')
-sns.distplot(fire['ln(area+1)'],kde=False,color='r',rug=True)
-plt.subplot(132) #Kernel Density Estimation
-plt.title('Kernel Density Estimation', fontsize=14, position=(0.5,1.05))
-plt.ylabel('Probability')
-plt.xlabel('ln(area+1)')
-sns.distplot(fire['ln(area+1)'],hist=False,color='g',kde_kws={'shade':True})
-plt.subplot(133) # Single Parameter Distribution
-plt.title('Single Parameter Distribution', fontsize=14, position=(0.5,1.05))
-plt.ylabel('Probability')
-plt.xlabel('ln(area+1)')
-sns.distplot(fire['ln(area+1)'],color='m')
+'''
+1D: Univariate Histograms,Kernel Density Estimation and Single Parameter Distribution
+'''
+
+def singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area'],figNo=13):
+  	'''
+: Function name: singleparameterdistribution
+: Function works to demonstrate the distribution of all single variables in our dataset
+  There are three distribution modes: 1) histograms (hist=True), color palatte:'r' 
+  									  2) kernel density estimation plots(kde=True), color palatte:'g'
+  									  3) combination of both(hist=True,kde=True), color palatte:'m'
+: type variable: list[str]
+: param variable: list containing any from ['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area']
+: type figNo: int
+: param figNo: number of figures plot= number of variables plot
+	
+'''
+  	assert isinstance(variable,list)
+  	assert isinstance(figNo,int)
+  	assert figNo==len(variable) #number of figures plot= number of variables plot
+  	for i in range(figNo):
+  		assert isinstance(variable[i],str)
+  		assert variable[i] in ['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area','ln(area+1)']# no input variable outside dataset
+  		plt.figure(i)
+  		if hist==True and kde==False: # Univariate Histograms
+  			t='Univariate Histogram'
+  			y='Frequency'
+  			clr='r'
+  		elif kde==True and hist==False:# Kernel Density Estimation
+  			t='Kernel Density Estimation'
+  			y='Probability'
+  			clr='g'
+  		else: # combination of two plots
+  			t='Univariate Histogram & Kernel Density Estimation'
+  			y='Probability'
+  			clr='m'
+  		plt.title(t,fontsize=12,position=(0.5,1.05))
+  		plt.ylabel(y,fontsize=14)
+  		plt.xlabel(variable[i],fontsize=14)
+  		plt.grid(linestyle='--') # add grids
+  		sns.distplot(fire[variable[i]],kde=kde,hist=hist,kde_kws={'shade':kde},color=clr,rug=True)# add shades to kde plots and rug plots to all three kinds of plots
+  		plt.show()
+
+singleparameterdistribution(kde=True,hist=True,variable=['X','Y','month','day','FFMC','DMC','DC','ISI','temp','RH','wind','rain','area','ln(area+1)'],figNo=14)
 
 
 '''
