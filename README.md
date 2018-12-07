@@ -7,15 +7,15 @@ We have analyzed a dataset collected from forests in the northeast region of Por
 
 Modules used:
    Please install all of the modules mentioned below before running the files.<br /> 
-  data processing:
+  Data Processing:<br />
   -Pandas<br />
   -numpy<br />
-  plot generating:
+  Data Visualization:<br />
   -matplotlib.pyplot<br />
   -seaborn<br />
   -mpl_toolkits.mplot3d<br />
   -pyehcart<br />
-  regression models:
+  Regression Models:<br />
   -sklearn:datasets, linear_model,sklearn.metrics<br />
   -scipy.interpolate
 
