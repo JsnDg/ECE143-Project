@@ -14,13 +14,12 @@ Modules used:
   -pyehcart<br />
   -numpy<br />
   -sklearn:datasets, linear_model,sklearn.metrics<br />
-  -To Be Continued
+  -scipy.interpolate
 
 Dataset link:http://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/ rates fire hazards based on both natural factors, such as humidity, as well as artificial factors, such as litter. All data is collected from Montesinho park, located in Portugal, with more than 570 instances through 2001 to 2003. 
 
 
-File Overview:
-  
+File Overview: Each folder contains data analysis sorted by their folder names, every picture shown in presentation(group11.pptx) can be found in final_presentation.ipynb.
 
 
 Reference
