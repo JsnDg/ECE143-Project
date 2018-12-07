@@ -1,6 +1,7 @@
 '''
 Jianing Zhang 11/12/2018
 Analysis of ISI with respect to FFMC and Wind. Factors affecting FFMC are also included to see if there is any correlation
+Linear regression included
 '''
 #import necessary modules
 import numpy as np
@@ -24,6 +25,8 @@ fire=[]#create array to record fire and non-fire
 
 
 for i in range(0,516):
+    assert area[i]>=0
+    assert isinstance(ISI[i],(int,float))#assert to use in graphing later
     if ISI[i]>50:
         print('Outlier in line:', i+2)#Obvious outlier picked through visualization. The data is marked and will be removed to train machine learning model.
     if area[i]>0:
@@ -56,8 +59,13 @@ plt.scatter(ISI,temp,color=fire)
 plt.xlabel('Temperature')
 plt.ylabel('ISI')
 plt.show()
+
 #Investigate further into relationship between ISI and direct factors.
 #Use linear regression model to see whether we can express ISI in terms of FFMC linearly.
+for j in range(1,516):
+    assert isinstance(fire_data[i,4], float)
+    assert isinstance(fire_data[i,7], float)
+    assert isinstance(fire_data[i,10], float)
 ISI_x1=np.column_stack([fire_data[1:,4]])#Pick out FFMC column from datasheet
 ISI_Y=np.column_stack([fire_data[1:,7]])#Pick out ISI column from datasheet
 reg = linear_model.LinearRegression()
